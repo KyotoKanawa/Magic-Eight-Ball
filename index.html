@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Eight Ball</title>
     <meta name="author" content="Leo">
+    <meta name="description" content="Magic Eight Ball application created by Leo">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
@@ -12,7 +13,6 @@
     <input type="text" id="question" placeholder="Ask your question...">
     <button onclick="shakeBall()">Shake</button>
     <p id="answer"></p>
-    <p id="farewell"></p>
     <script>
         const answers = [
             "Yes, definitely!",
@@ -33,21 +33,10 @@
                 const randomIndex = Math.floor(Math.random() * answers.length);
                 document.getElementById('answer').innerText = answers[randomIndex];
                 previousQuestion = question;
-                askToContinue();
             } else if (question === previousQuestion) {
                 document.getElementById('answer').innerText = "Please ask a different question.";
             } else {
                 document.getElementById('answer').innerText = "Please ask a question.";
-            }
-        }
-
-        function askToContinue() {
-            const continueAsking = confirm("Do you want to ask another question?");
-            if (!continueAsking) {
-                document.getElementById('farewell').innerText = "Thank you for playing! Goodbye!";
-            } else {
-                document.getElementById('question').value = "";
-                document.getElementById('answer').innerText = "";
             }
         }
     </script>
