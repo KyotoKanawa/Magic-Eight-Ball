@@ -12,7 +12,6 @@
     <input type="text" id="question" placeholder="Ask your question...">
     <button onclick="shakeBall()">Shake</button>
     <p id="answer"></p>
-    <button onclick="stopAsking()">Stop</button>
     <p id="farewell"></p>
     <script>
         const answers = [
@@ -26,27 +25,30 @@
             "Absolutely!"
         ];
 
-        let asking = true;
         let previousQuestion = "";
 
         function shakeBall() {
-            if (asking) {
-                const question = document.getElementById('question').value;
-                if (question && question !== previousQuestion) {
-                    const randomIndex = Math.floor(Math.random() * answers.length);
-                    document.getElementById('answer').innerText = answers[randomIndex];
-                    previousQuestion = question;
-                } else if (question === previousQuestion) {
-                    document.getElementById('answer').innerText = "Please ask a different question.";
-                } else {
-                    document.getElementById('answer').innerText = "Please ask a question.";
-                }
+            const question = document.getElementById('question').value;
+            if (question && question !== previousQuestion) {
+                const randomIndex = Math.floor(Math.random() * answers.length);
+                document.getElementById('answer').innerText = answers[randomIndex];
+                previousQuestion = question;
+                askToContinue();
+            } else if (question === previousQuestion) {
+                document.getElementById('answer').innerText = "Please ask a different question.";
+            } else {
+                document.getElementById('answer').innerText = "Please ask a question.";
             }
         }
 
-        function stopAsking() {
-            asking = false;
-            document.getElementById('farewell').innerText = "Thank you for playing! Goodbye!";
+        function askToContinue() {
+            const continueAsking = confirm("Do you want to ask another question?");
+            if (!continueAsking) {
+                document.getElementById('farewell').innerText = "Thank you for playing! Goodbye!";
+            } else {
+                document.getElementById('question').value = "";
+                document.getElementById('answer').innerText = "";
+            }
         }
     </script>
 </body>
