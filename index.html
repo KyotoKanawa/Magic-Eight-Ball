@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Eight Ball</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <h1>Magic Eight Ball</h1>
+    <input type="text" id="question" placeholder="Ask your question...">
+    <button onclick="shakeBall()">Shake</button>
+    <p id="answer"></p>
+    <script>
+        const answers = [
+            "Yes, definitely!",
+            "No, not at all.",
+            "Ask again later.",
+            "It is certain.",
+            "Very doubtful.",
+            "Yes, but be cautious.",
+            "No, but try again.",
+            "Absolutely!"
+        ];
+
+        function shakeBall() {
+            const question = document.getElementById('question').value;
+            if (question) {
+                const randomIndex = Math.floor(Math.random() * answers.length);
+                document.getElementById('answer').innerText = answers[randomIndex];
+            } else {
+                document.getElementById('answer').innerText = "Please ask a question.";
+            }
+        }
+    </script>
+</body>
+</html>
