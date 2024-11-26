@@ -12,6 +12,8 @@
     <input type="text" id="question" placeholder="Ask your question...">
     <button onclick="shakeBall()">Shake</button>
     <p id="answer"></p>
+    <button onclick="stopAsking()">Stop</button>
+    <p id="farewell"></p>
     <script>
         const answers = [
             "Yes, definitely!",
@@ -24,14 +26,27 @@
             "Absolutely!"
         ];
 
+        let asking = true;
+        let previousQuestion = "";
+
         function shakeBall() {
-            const question = document.getElementById('question').value;
-            if (question) {
-                const randomIndex = Math.floor(Math.random() * answers.length);
-                document.getElementById('answer').innerText = answers[randomIndex];
-            } else {
-                document.getElementById('answer').innerText = "Please ask a question.";
+            if (asking) {
+                const question = document.getElementById('question').value;
+                if (question && question !== previousQuestion) {
+                    const randomIndex = Math.floor(Math.random() * answers.length);
+                    document.getElementById('answer').innerText = answers[randomIndex];
+                    previousQuestion = question;
+                } else if (question === previousQuestion) {
+                    document.getElementById('answer').innerText = "Please ask a different question.";
+                } else {
+                    document.getElementById('answer').innerText = "Please ask a question.";
+                }
             }
+        }
+
+        function stopAsking() {
+            asking = false;
+            document.getElementById('farewell').innerText = "Thank you for playing! Goodbye!";
         }
     </script>
 </body>
